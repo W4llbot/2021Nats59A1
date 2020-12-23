@@ -82,6 +82,7 @@ void opcontrol() {
 
 	double left, right;
 	bool isTank = true;
+	bool autosort = true;
 	while(true) {
 		if(master.get_digital_new_press(DIGITAL_Y)) isTank = !isTank;
 
@@ -101,16 +102,23 @@ void opcontrol() {
 		fR.move(right);
 		bR.move(right);
 
-		int rollerPower = (master.get_digital(DIGITAL_L1) - master.get_digital(DIGITAL_L2)) * 127;
-		lRoller.move(rollerPower);
-		rRoller.move(rollerPower);
+		if(master.get_digital_new_press(DIGITAL_A)){
+			autosort = !autosort;
+			enableAutosort(autosort);
+		}
 
-		// int routerPower = (master.get_digital(DIGITAL_R1) - master.get_digital(DIGITAL_R2)) * 127;
-		// // router.move(routerPower);
-		// shooter.move(routerPower);
+		int intakePower = (master.get_digital(DIGITAL_L1) - master.get_digital(DIGITAL_L2)) * 127;
+		lRoller.move(intakePower);
+		rRoller.move(intakePower);
 
-		if(master.get_digital_new_press(DIGITAL_X)) toggleDiscardSig();
-		if(master.get_digital(DIGITAL_R1)) shootBall();
+		if(autosort) {
+			if(master.get_digital_new_press(DIGITAL_X)) toggleDiscardSig();
+			if(master.get_digital(DIGITAL_R1)) shootBall();
+		}else {
+			int shooterPower = (master.get_digital(DIGITAL_R1) - master.get_digital(DIGITAL_R2)) * 127;
+			router.move(shooterPower);
+			shooter.move(shooterPower);
+		}
 		delay(5);
 	}
 }
