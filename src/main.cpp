@@ -19,6 +19,8 @@ void initialize() {
 
 	Vision routerVision (routerVisionPort);
 	ADIAnalogIn shooterLine(shooterLinePort);
+	Imu inertial(inertialPort);
+	inertial.reset();
 
 	Task routerControlTask(routerControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
 	Task shooterControlTask(shooterControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
@@ -69,6 +71,18 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	Imu inertial(inertialPort);
+	int time = pros::millis();
+  int iter = 0;
+  while (inertial.is_calibrating()) {
+    printf("IMU calibrating... %d\n", iter);
+    iter += 10;
+    pros::delay(10);
+  }
+  // should print about 2000 ms
+  printf("IMU is done calibrating (took %d ms)\n", iter - time);
+
+
 	Motor fL(fLPort);
 	Motor bL(bLPort);
 	Motor fR(fRPort);
@@ -82,7 +96,7 @@ void opcontrol() {
 
 	double left, right;
 	bool isTank = true;
-	bool autosort = true;
+	bool autosort = false;
 	while(true) {
 		if(master.get_digital_new_press(DIGITAL_Y)) isTank = !isTank;
 
@@ -116,9 +130,11 @@ void opcontrol() {
 			if(master.get_digital(DIGITAL_R1)) shootBall();
 		}else {
 			int shooterPower = (master.get_digital(DIGITAL_R1) - master.get_digital(DIGITAL_R2)) * 127;
-			router.move(shooterPower);
+			if(intakePower < -10) forceOuttake(true);
+			else forceOuttake(false);
 			shooter.move(shooterPower);
 		}
+		printf("Inertial rotation: %.2f\n", inertial.get_rotation());
 		delay(5);
 	}
 }

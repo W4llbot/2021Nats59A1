@@ -1,7 +1,7 @@
 #include "main.h"
 #include "mech_lib.hpp"
 
-#define VISION_BALL_THRESHOLD 50
+#define VISION_BALL_THRESHOLD 100
 #define SHOOTER_BALL_THRESHOLD 2900
 enum VisionSignature {SIG_EMPTY, SIG_RED, SIG_BLUE};
 std::string sigToName[3] = {"Empty", "Red", "Blue"};
@@ -15,7 +15,8 @@ Vision routerVision(routerVisionPort);
 ADIAnalogIn shooterLine(shooterLinePort);
 
 int discardSig = SIG_BLUE;
-bool autosortEnabled = true;
+bool autosortEnabled = false;
+bool forcedOuttake = false;
 bool shootTrigger = false;
 
 int oppSig(int sig) {
@@ -30,10 +31,10 @@ void routerControl(void * ignore) {
   Controller master(E_CONTROLLER_MASTER);
   router.move(127);
   while(true) {
-    if(autosortEnabled) {
-      vision_object_s_t visionObject = routerVision.get_by_size(0);
-      int currSig = visionObject.height > VISION_BALL_THRESHOLD ? visionObject.signature : SIG_EMPTY;
-
+    vision_object_s_t visionObject = routerVision.get_by_size(0);
+    int currSig = visionObject.height > VISION_BALL_THRESHOLD ? visionObject.signature : SIG_EMPTY;
+    if(forcedOuttake == true) router.move(-127);
+    else if(autosortEnabled) {
       if(currSig == discardSig) router.move(-127);
       else if(currSig == oppSig(discardSig)) {
         if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) router.move(10);
@@ -43,6 +44,9 @@ void routerControl(void * ignore) {
       master.print(2, 0, "Discard: %S\n", sigToName[discardSig]);
       // printf("Current sig: %d\n", currSig);
     }else {
+      if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD && currSig == SIG_EMPTY ) router.move(10);
+      else router.move(127);
+
       master.print(2, 0, "Autosort disabled\n");
     }
     delay(5);
@@ -51,7 +55,7 @@ void routerControl(void * ignore) {
 
 void shooterControl(void * ignore) {
   while(true) {
-    if(autosortEnabled) {
+    // if(autosortEnabled) {
       if(shootTrigger) {
         shooter.move(127);
         while(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) delay(5);
@@ -59,7 +63,7 @@ void shooterControl(void * ignore) {
         shooter.move(-10);
         shootTrigger = false;
       }
-    }
+    // }
     delay(5);
   }
 }
@@ -71,4 +75,7 @@ void shootBall() {
 void enableAutosort(bool value) {
   router.move(127);
   autosortEnabled = value;
+}
+void forceOuttake(bool value) {
+  forcedOuttake = value;
 }
