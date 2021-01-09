@@ -13,8 +13,8 @@
  */
 #define DEFAULT_KP 0.28
 #define DEFAULT_KD 0.1
-#define DEFAULT_TURN_KP 0.265
-#define DEFAULT_TURN_KD 0.1
+#define DEFAULT_TURN_KP 0.6
+#define DEFAULT_TURN_KD 0.2
 /** declare motors */
 Motor FL (fLPort);
 Motor BL (bLPort);

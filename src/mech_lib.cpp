@@ -41,13 +41,13 @@ void routerControl(void * ignore) {
         else router.move(127);
       }
 
-      master.print(2, 0, "Discard: %S\n", sigToName[discardSig]);
+      // master.print(2, 0, "Discard: %S\n", sigToName[discardSig]);
       // printf("Current sig: %d\n", currSig);
     }else {
-      if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD && currSig == SIG_EMPTY ) router.move(10);
+      if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD && currSig != SIG_EMPTY ) router.move(10);
       else router.move(127);
 
-      master.print(2, 0, "Autosort disabled\n");
+      // master.print(2, 0, "Autosort disabled\n");
     }
     delay(5);
   }
@@ -78,4 +78,8 @@ void enableAutosort(bool value) {
 }
 void forceOuttake(bool value) {
   forcedOuttake = value;
+}
+void intake(int speed) {
+  lRoller.move(speed);
+  rRoller.move(speed);
 }

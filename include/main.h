@@ -39,6 +39,7 @@
 
 #include "8059MotionProfileLib/api.hpp"
 #include "globals.hpp"
+#include "mech_lib.hpp"
 
 /**
  * You should add more #includes here

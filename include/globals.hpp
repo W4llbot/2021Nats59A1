@@ -10,7 +10,7 @@
 #define shooterPort 9
 #define routerPort 10
 
-#define inertialPort 3
+#define inertialPort 5
 #define shooterLinePort 6
 #define routerVisionPort 16
 #define outerVisionPort 17

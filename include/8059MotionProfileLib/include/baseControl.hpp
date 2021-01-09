@@ -13,15 +13,15 @@
  * 3: Power (print powerL & powerR)
  * 4: Raw encoder values (print raw encdL & encdR)
  */
-#define DEBUG_MODE 2
+#define DEBUG_MODE 1
 // Maximum power allowed
-#define MAX_POW 80
+#define MAX_POW 100
 /**
  * Maximum power increment every 20ms (20ms is the refresh rate of Task baseMotorControl)
  * This is to prevent too rapid changes to the motor power
  * Mathematically: |V - V previous| <= RAMPING_POW
  */
-#define RAMPING_POW 6
+#define RAMPING_POW 8
 /**
  * DISTANCE_LEEWAY is the distance (in inches) within which from the target
  * the robot would register that it has arrived at the target.

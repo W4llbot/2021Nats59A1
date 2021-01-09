@@ -1,5 +1,6 @@
 #include "main.h"
 #include "mech_lib.hpp"
+#include "autonSets.hpp"
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -24,6 +25,14 @@ void initialize() {
 
 	Task routerControlTask(routerControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
 	Task shooterControlTask(shooterControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+	Task baseOdometryTask(baseOdometry, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+	Task baseControlTask(baseControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+	Task baseMotorControlTask(baseMotorControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+
+	fL.tare_position();
+	fR.tare_position();
+	bL.tare_position();
+	bR.tare_position();
 }
 
 /**
@@ -55,7 +64,9 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	skillsRoute();
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -134,7 +145,8 @@ void opcontrol() {
 			else forceOuttake(false);
 			shooter.move(shooterPower);
 		}
-		printf("Inertial rotation: %.2f\n", inertial.get_rotation());
+		// printf("Inertial rotation: %.2f\n", inertial.get_rotation());
+		// master.print(2, 0, "%.2f", (bL.get_position() - bR.get_position())*inPerDeg/baseWidth*toDeg);
 		delay(5);
 	}
 }

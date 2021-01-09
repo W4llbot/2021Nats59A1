@@ -12,9 +12,9 @@
  * Essential variables for odometry task and functions
  */
 //Tuning: turn at least 2 rotations and compare results in program & real life
-#define baseWidth 11.28956513502096
+#define baseWidth 15.54980797833373
 //Tuning: go straight and compare results in program & real life
-#define inPerDeg 0.0241043549920626
+#define inPerDeg 0.0466535903072055
 // Make Coordinates position a universally accessible object
 extern Coordinates position;
 /**
@@ -24,5 +24,6 @@ extern Coordinates position;
 std::pair<double, double> getEncdVals(bool rawData);
 void baseOdometry(void * ignore);
 void setCoords(double x, double y, double angle);
+void waitCallibrate();
 
 #endif
