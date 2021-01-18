@@ -8,6 +8,7 @@ void shootBall();
 void enableAutosort(bool value);
 void shooterControl(void * ignore);
 void forceOuttake(bool value);
+void waitShooter();
 void intake(int speed);
 
 #endif

@@ -12,6 +12,7 @@
 
 #define inertialPort 5
 #define shooterLinePort 6
+#define routerLinePort 7
 #define routerVisionPort 16
 #define outerVisionPort 17
 
