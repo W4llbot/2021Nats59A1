@@ -54,6 +54,7 @@ void baseOdometry(void * ignore){
   int count = 0;
   while(!COMPETITION_MODE || competition::is_autonomous()){
     if(inertial.is_calibrating()) {
+      master.print(2, 0, "inertial callibrating\n");
       printf("inertial callibrating\n");
     }else {
       /** retrieve & update encoder values */

@@ -30,7 +30,7 @@ void skillsRoute() {
     // score tower 1
     double stdDelay = 300;
     resetCoords(0, 0, 0);
-    scoreTower();
+    /*scoreTower();
 
     // Reverse to collect 2 balls
     delay(300);
@@ -66,6 +66,7 @@ void skillsRoute() {
 
     // turn and collect ball
     delay(stdDelay);
+    intake(-50);
     baseMove(-10);
     waitBase(500);
     delay(stdDelay);
@@ -73,7 +74,7 @@ void skillsRoute() {
     waitBase(1000);
     shootBall();
     delay(stdDelay);
-    baseMove(-54);
+    baseMove(-52);
     waitBase(2000);
     delay(stdDelay);
 
@@ -94,7 +95,7 @@ void skillsRoute() {
     intake(-50);
     shootBall();
     delay(stdDelay);
-    baseMove(-48);
+    baseMove(-49);
     waitShooter();
     // delay(350);
     shootBall();
@@ -102,7 +103,7 @@ void skillsRoute() {
     delay(stdDelay);
 
     // turn and score tower 4
-    baseTurn(155);
+    baseTurn(152);
     waitBase(1000);
     delay(stdDelay);
     baseMove(5);
@@ -124,7 +125,7 @@ void skillsRoute() {
     waitBase(1500);
     delay(stdDelay);
     intake(127);
-    baseMove(37);
+    baseMove(39);
     waitBase(1500);
     delay(stdDelay);
 
@@ -145,11 +146,11 @@ void skillsRoute() {
     waitShooter();
     powerBase(0, 0);
     pauseBase(false);
-    resetCoords(0, 0, 0);
+    resetCoords(0, 0, 0);*/
 
     // reverse -55 turn -60 reverse -18 turn 90 move forward 31
 
-    /* //reverse and eject + collect ball
+     //reverse and eject + collect ball
     baseMove(-55);
     shootBall();
     waitBase(2000);
@@ -172,5 +173,5 @@ void skillsRoute() {
     delay(stdDelay);
 
     scoreTower();
-    intake(-127); */
+    intake(-127);
 }
