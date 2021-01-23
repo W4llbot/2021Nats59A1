@@ -6,7 +6,7 @@ void scoreTower() {
   intake(127);
   shootBall();
   waitShooter();
-  // intake(0);
+  intake(0);
   powerBase(0, 0);
   pauseBase(false);
   resetCoords(0, 0, 0);
@@ -35,7 +35,7 @@ void skillsRoute() {
     // Reverse to collect 2 balls
     delay(300);
     baseMove(-68);
-    delay(300);
+    // delay(300);
     shootBall();
     waitShooter();
     intake(-50);
@@ -92,36 +92,40 @@ void skillsRoute() {
     baseTurn(65, 1.0, 0.3);
     waitBase(1000);
     intake(-50);
+    shootBall();
     delay(stdDelay);
     baseMove(-48);
-    shootBall();
     waitShooter();
     // delay(350);
     shootBall();
     waitBase(2000);
     delay(stdDelay);
 
-    // turn and sore score tower
+    // turn and score tower 4
     baseTurn(155);
     waitBase(1000);
     delay(stdDelay);
     baseMove(5);
     waitBase(500);
     scoreTower();
+    intake(-127);
 
-    // reverse 10 turn 102 move 33 turn -70 12
+    // reverse 30 move 10 turn 245 move 40 turn 195 move 25
 
     // turn and collect ball
-    baseMove(-10);
-    waitBase(500);
+    baseMove(-30);
+    waitBase(1500);
+    shootBall();
     delay(stdDelay);
-    baseTurn(257);
+    baseMove(10);
+    waitBase(1000);
+    delay(stdDelay);
+    baseTurn(245);
     waitBase(1500);
     delay(stdDelay);
     intake(127);
-    baseMove(42);
+    baseMove(37);
     waitBase(1500);
-    shootBall();
     delay(stdDelay);
 
     // turn and score scoreTower
@@ -143,4 +147,30 @@ void skillsRoute() {
     pauseBase(false);
     resetCoords(0, 0, 0);
 
+    // reverse -55 turn -60 reverse -18 turn 90 move forward 31
+
+    /* //reverse and eject + collect ball
+    baseMove(-55);
+    shootBall();
+    waitBase(2000);
+    delay(stdDelay);
+    shootBall();
+    baseTurn(145, 1.0, 0.3);
+    waitBase(1000);
+    delay(stdDelay);
+    // intake(127);
+    baseMove(-19);
+    waitBase(2000);
+    delay(stdDelay);
+
+    //turn and score tower 6
+    baseTurn(240);
+    waitBase(1000);
+    delay(stdDelay);
+    baseMove(31);
+    waitBase(1000);
+    delay(stdDelay);
+
+    scoreTower();
+    intake(-127); */
 }
