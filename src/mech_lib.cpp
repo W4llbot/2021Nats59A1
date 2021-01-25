@@ -20,6 +20,7 @@ int discardSig = SIG_BLUE;
 bool autosortEnabled = false;
 bool forcedOuttake = false;
 bool shootTrigger = false;
+bool loaded = false;
 
 int oppSig(int sig) {
   return 3 - sig;
@@ -46,8 +47,13 @@ void routerControl(void * ignore) {
   //     // master.print(2, 0, "Discard: %S\n", sigToName[discardSig]);
   //     // printf("Current sig: %d\n", currSig);
     else {
-      if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD && routerLine.get_value() < ROUTER_BALL_THRESHOLD ) router.move(10);
-      else router.move(127);
+      if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD && routerLine.get_value() < ROUTER_BALL_THRESHOLD) {
+        router.move(10);
+        loaded = true;
+      }else {
+        router.move(127);
+        loaded = false;
+      }
 
       // master.print(2, 0, "Autosort disabled\n");
     }
@@ -91,4 +97,8 @@ void forceOuttake(bool value) {
 void intake(int speed) {
   lRoller.move(speed);
   rRoller.move(speed);
+}
+
+void waitLoaded() {
+  while(!loaded) delay(5);
 }

@@ -10,5 +10,6 @@ void shooterControl(void * ignore);
 void forceOuttake(bool value);
 void waitShooter();
 void intake(int speed);
+void waitLoaded();
 
 #endif
