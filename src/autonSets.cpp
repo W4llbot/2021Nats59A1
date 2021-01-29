@@ -58,7 +58,7 @@ void skillsRoute() {
     shootBall();
     waitShooter();
     delay(300);
-    intake(0);
+    intake(-30);
     shootBall();
     waitShooter();
     powerBase(0, 0);
@@ -97,7 +97,7 @@ void skillsRoute() {
     intake(-127);
     shootBall();
     delay(stdDelay);
-    baseMove(-48.5);
+    baseMove(-48);
     waitShooter();
     // delay(350);
     shootBall();
@@ -128,7 +128,7 @@ void skillsRoute() {
     waitBase(1500);
     delay(stdDelay);
     intake(127);
-    baseMove(41);
+    baseMove(39);
     waitBase(1500);
     delay(stdDelay);
 
@@ -157,7 +157,7 @@ void skillsRoute() {
      // add 188 deg to everything after merge
     Imu inertial(inertialPort);
     double firstHalf = inertial.get_rotation();
-    baseMove(-55);
+    baseMove(-56);
     shootBall();
     waitBase(2000);
     delay(stdDelay);
@@ -191,7 +191,7 @@ void skillsRoute() {
     waitBase(1000);
     shootBall();
     delay(stdDelay);
-    baseMove(-49);
+    baseMove(-48);
     waitBase(2000);
     delay(stdDelay);
 
