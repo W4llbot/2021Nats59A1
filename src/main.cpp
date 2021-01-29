@@ -65,6 +65,10 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	// resetCoords(0, 0, 0);
+	// baseTurn(90, 0.62, 0.15);
+	// waitBase(2000);
+	// delay(300);
 	skillsRoute();
 }
 

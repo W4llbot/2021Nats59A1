@@ -30,24 +30,25 @@ void skillsRoute() {
     // score tower 1
     double stdDelay = 300;
     resetCoords(0, 0, 0);
-    /*scoreTower();
+    scoreTower();
 
     // Reverse to collect 2 balls
-    delay(300);
+    delay(100);
     baseMove(-68);
     // delay(300);
     shootBall();
     waitShooter();
-    intake(-50);
+    intake(-127);
     // delay(450);
     shootBall();
     waitBase(2000);
     delay(stdDelay);
 
     // turn and move to 2nd goal
-    baseTurn(65);
+    baseTurn(60);
     waitBase(1000);
     delay(stdDelay);
+    intake(0);
     baseMove(28);
     waitBase(1000);
 
@@ -74,7 +75,7 @@ void skillsRoute() {
     waitBase(1000);
     shootBall();
     delay(stdDelay);
-    baseMove(-52);
+    baseMove(-51);
     waitBase(2000);
     delay(stdDelay);
 
@@ -92,7 +93,7 @@ void skillsRoute() {
     delay(stdDelay);
     baseTurn(65, 1.0, 0.3);
     waitBase(1000);
-    intake(-50);
+    intake(-127);
     shootBall();
     delay(stdDelay);
     baseMove(-49);
@@ -106,6 +107,7 @@ void skillsRoute() {
     baseTurn(152);
     waitBase(1000);
     delay(stdDelay);
+    intake(0);
     baseMove(5);
     waitBase(500);
     scoreTower();
@@ -121,16 +123,16 @@ void skillsRoute() {
     baseMove(10);
     waitBase(1000);
     delay(stdDelay);
-    baseTurn(245);
+    baseTurn(243);
     waitBase(1500);
     delay(stdDelay);
     intake(127);
-    baseMove(39);
+    baseMove(40);
     waitBase(1500);
     delay(stdDelay);
 
-    // turn and score scoreTower
-    baseTurn(195, 1.0, 0.3);
+    // turn and score tower 5
+    baseTurn(193, 1.0, 0.3);
     waitBase(1000);
     delay(stdDelay);
     baseMove(25);
@@ -146,18 +148,20 @@ void skillsRoute() {
     waitShooter();
     powerBase(0, 0);
     pauseBase(false);
-    resetCoords(0, 0, 0);*/
+    resetCoords(0, 0, 0);
 
     // reverse -55 turn -60 reverse -18 turn 90 move forward 31
 
      //reverse and eject + collect ball
      // add 188 deg to everything after merge
-    baseMove(-54);
+    Imu inertial(inertialPort);
+    double firstHalf = inertial.get_rotation();
+    baseMove(-55);
     shootBall();
     waitBase(2000);
     delay(stdDelay);
     shootBall();
-    baseTurn(-38, 1.0, 0.3);
+    baseTurn(-38 + firstHalf, 1.0, 0.3);
     waitBase(1000);
     delay(stdDelay);
     // intake(127);
@@ -166,7 +170,7 @@ void skillsRoute() {
     delay(stdDelay);
 
     //turn and score tower 6
-    baseTurn(50);
+    baseTurn(50 + firstHalf);
     waitBase(1000);
     delay(stdDelay);
     baseMove(31);
@@ -182,7 +186,7 @@ void skillsRoute() {
     baseMove(-10);
     waitBase(500);
     delay(stdDelay);
-    baseTurn(-38);
+    baseTurn(-38 + firstHalf);
     waitBase(1000);
     shootBall();
     delay(stdDelay);
@@ -191,7 +195,7 @@ void skillsRoute() {
     delay(stdDelay);
 
     // score tower 7
-    baseTurn(93);
+    baseTurn(93 + firstHalf);
     waitBase(1000);
     delay(stdDelay);
     baseMove(15);
@@ -202,7 +206,7 @@ void skillsRoute() {
     baseMove(-18);
     waitBase(1000);
     delay(stdDelay);
-    baseTurn(53, 1.0, 0.3);
+    baseTurn(53 + firstHalf, 1.0, 0.3);
     waitBase(1000);
     intake(-50);
     shootBall();
@@ -215,7 +219,7 @@ void skillsRoute() {
     delay(stdDelay);
 
     // turn and score tower 4
-    baseTurn(141);
+    baseTurn(141 + firstHalf);
     waitBase(1000);
     delay(stdDelay);
     baseMove(5);
@@ -227,7 +231,7 @@ void skillsRoute() {
     waitBase(1500);
     shootBall();
     delay(stdDelay);
-    baseTurn(315);
+    baseTurn(315 + firstHalf);
     waitBase(1500);
     delay(stdDelay);
     intake(127);
