@@ -9,10 +9,10 @@
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	Motor fL(fLPort, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
-	Motor bL(bLPort, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
-	Motor fR(fRPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
-	Motor bR(bRPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
+	Motor FL(FLPort, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
+	Motor BL(BLPort, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
+	Motor FR(FRPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
+	Motor BR(BRPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
 	Motor shooter(shooterPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
 	Motor router(routerPort, E_MOTOR_GEARSET_06, false, E_MOTOR_ENCODER_DEGREES);
 	Motor lRoller(lRollerPort, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
@@ -20,19 +20,15 @@ void initialize() {
 
 	Vision routerVision (routerVisionPort);
 	ADIAnalogIn shooterLine(shooterLinePort);
-	Imu inertial(inertialPort);
-	inertial.reset();
+	Imu imu(imuPort);
+	imu.reset();
 
 	Task routerControlTask(routerControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
 	Task shooterControlTask(shooterControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
-	Task baseOdometryTask(baseOdometry, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
-	Task baseControlTask(baseControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
-	Task baseMotorControlTask(baseMotorControl, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
-
-	fL.tare_position();
-	fR.tare_position();
-	bL.tare_position();
-	bR.tare_position();
+	Task controlTask(Control, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+	Task debugTask(Debug, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+	Task odometryTask(Odometry, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
+	Task sensorsTask(Sensors, (void*)"PROS", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT);
 }
 
 /**
@@ -65,10 +61,6 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	// resetCoords(0, 0, 0);
-	// baseTurn(90, 0.62, 0.15);
-	// waitBase(2000);
-	// delay(300);
 	skillsRoute();
 }
 
@@ -86,22 +78,10 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	Imu inertial(inertialPort);
-	int time = pros::millis();
-  int iter = 0;
-  while (inertial.is_calibrating()) {
-    printf("IMU calibrating... %d\n", iter);
-    iter += 10;
-    pros::delay(10);
-  }
-  // should print about 2000 ms
-  printf("IMU is done calibrating (took %d ms)\n", iter - time);
-
-
-	Motor fL(fLPort);
-	Motor bL(bLPort);
-	Motor fR(fRPort);
-	Motor bR(bRPort);
+	Motor FL(FLPort);
+	Motor BL(BLPort);
+	Motor FR(FRPort);
+	Motor BR(BRPort);
 	Motor shooter(shooterPort);
 	Motor router(routerPort);
 	Motor lRoller(lRollerPort);
@@ -126,10 +106,10 @@ void opcontrol() {
 			right = power - turn;
 		}
 
-		fL.move(left);
-		bL.move(left);
-		fR.move(right);
-		bR.move(right);
+		FL.move(left);
+		BL.move(left);
+		FR.move(right);
+		BR.move(right);
 
 		if(master.get_digital_new_press(DIGITAL_A)){
 			autosort = !autosort;
@@ -149,7 +129,7 @@ void opcontrol() {
 			else forceOuttake(false);
 			shooter.move(shooterPower);
 		}
-		// printf("Inertial rotation: %.2f\n", inertial.get_rotation());
+		// printf("imu rotation: %.2f\n", imu.get_rotation());
 		// master.print(2, 0, "%.2f", (bL.get_position() - bR.get_position())*inPerDeg/baseWidth*toDeg);
 		delay(5);
 	}

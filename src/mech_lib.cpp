@@ -34,18 +34,7 @@ void routerControl(void * ignore) {
   Controller master(E_CONTROLLER_MASTER);
   router.move(127);
   while(true) {
-  //   vision_object_s_t visionObject = routerVision.get_by_size(0);
-  //   int currSig = visionObject.height > VISION_BALL_THRESHOLD ? visionObject.signature : SIG_EMPTY;
     if(forcedOuttake == true) router.move(-127);
-    // else if(autosortEnabled) {
-  //     if(currSig == discardSig) router.move(-127);
-  //     else if(currSig == oppSig(discardSig)) {
-  //       if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) router.move(10);
-  //       else router.move(127);
-  //     }
-  //
-  //     // master.print(2, 0, "Discard: %S\n", sigToName[discardSig]);
-  //     // printf("Current sig: %d\n", currSig);
     else {
       if(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD && routerLine.get_value() < ROUTER_BALL_THRESHOLD) {
         router.move(10);
