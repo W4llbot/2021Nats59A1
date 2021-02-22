@@ -12,23 +12,12 @@ Motor router(routerPort);
 Motor lRoller(lRollerPort);
 Motor rRoller(rRollerPort);
 
-Vision routerVision(routerVisionPort);
 ADIAnalogIn shooterLine(shooterLinePort);
 ADIAnalogIn routerLine(routerLinePort);
 
-int discardSig = SIG_BLUE;
-bool autosortEnabled = false;
 bool forcedOuttake = false;
 bool shootTrigger = false;
 bool loaded = false;
-
-int oppSig(int sig) {
-  return 3 - sig;
-}
-
-void toggleDiscardSig() {
-  discardSig = oppSig(discardSig);
-}
 
 void routerControl(void * ignore) {
   Controller master(E_CONTROLLER_MASTER);
@@ -43,31 +32,32 @@ void routerControl(void * ignore) {
         router.move(127);
         loaded = false;
       }
-
-      // master.print(2, 0, "Autosort disabled\n");
     }
     delay(5);
   }
 }
 
+bool isLoaded() {
+  return shooterLine.get_value() < SHOOTER_BALL_THRESHOLD;
+}
+
 void waitShooter() {
-  while(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) delay(5);
-  while(shooterLine.get_value() > SHOOTER_BALL_THRESHOLD) delay(5);
-  while(shootTrigger) delay(5);
+  // while(!isLoaded()) delay(5);
+  while(isLoaded()) delay(5);
+  while(!isLoaded()) delay(5);
+  // while(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) delay(5);
+  // while(shootTrigger) delay(5);
   // while(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) delay(5);
 }
 
 void shooterControl(void * ignore) {
   while(true) {
-    // if(autosortEnabled) {
-      if(shootTrigger) {
-        shooter.move(127);
-        while(shooterLine.get_value() < SHOOTER_BALL_THRESHOLD) delay(5);
-        while(shooterLine.get_value() > SHOOTER_BALL_THRESHOLD) delay(5);
-        shooter.move(-10);
-        shootTrigger = false;
-      }
-    // }
+    if(shootTrigger) {
+      shooter.move(127);
+      waitShooter();
+      shooter.move(-10);
+      shootTrigger = false;
+    }
     delay(5);
   }
 }
@@ -76,10 +66,6 @@ void shootBall() {
   shootTrigger = true;
 }
 
-void enableAutosort(bool value) {
-  router.move(127);
-  autosortEnabled = value;
-}
 void forceOuttake(bool value) {
   forcedOuttake = value;
 }
@@ -89,5 +75,5 @@ void intake(int speed) {
 }
 
 void waitLoaded() {
-  while(!loaded) delay(5);
+  while(routerLine.get_value() > ROUTER_BALL_THRESHOLD) delay(5);
 }

@@ -18,7 +18,6 @@ void initialize() {
 	Motor lRoller(lRollerPort, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
 	Motor rRoller(rRollerPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
 
-	Vision routerVision (routerVisionPort);
 	ADIAnalogIn shooterLine(shooterLinePort);
 	Imu imu(imuPort);
 	imu.reset();
@@ -111,23 +110,24 @@ void opcontrol() {
 		FR.move(right);
 		BR.move(right);
 
-		if(master.get_digital_new_press(DIGITAL_A)){
-			autosort = !autosort;
-			enableAutosort(autosort);
-		}
+		// if(master.get_digital_new_press(DIGITAL_A)){
+		// 	autosort = !autosort;
+		// 	enableAutosort(autosort);
+		// }
 
 		int intakePower = (master.get_digital(DIGITAL_L1) - master.get_digital(DIGITAL_L2)) * 127;
 		lRoller.move(intakePower);
 		rRoller.move(intakePower);
 
 		if(autosort) {
-			if(master.get_digital_new_press(DIGITAL_X)) toggleDiscardSig();
-			if(master.get_digital(DIGITAL_R1)) shootBall();
+			// if(master.get_digital_new_press(DIGITAL_X)) toggleDiscardSig();
+			// if(master.get_digital(DIGITAL_R1)) shootBall();
 		}else {
-			int shooterPower = (master.get_digital(DIGITAL_R1) - master.get_digital(DIGITAL_R2)) * 127;
+			// int shooterPower = (master.get_digital(DIGITAL_R1) - master.get_digital(DIGITAL_R2)) * 127;
+			if(master.get_digital(DIGITAL_R1)) shootBall();
 			if(intakePower < -10) forceOuttake(true);
 			else forceOuttake(false);
-			shooter.move(shooterPower);
+			// shooter.move(shooterPower);
 		}
 		// printf("imu rotation: %.2f\n", imu.get_rotation());
 		// master.print(2, 0, "%.2f", (bL.get_position() - bR.get_position())*inPerDeg/baseWidth*toDeg);
