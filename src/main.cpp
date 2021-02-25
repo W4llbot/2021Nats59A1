@@ -19,6 +19,7 @@ void initialize() {
 	Motor rRoller(rRollerPort, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
 
 	ADIAnalogIn shooterLine(shooterLinePort);
+	ADIAnalogIn routerLine(routerLinePort);
 	Imu imu(imuPort);
 	imu.reset();
 

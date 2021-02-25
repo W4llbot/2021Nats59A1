@@ -74,6 +74,7 @@ void intake(int speed) {
   rRoller.move(speed);
 }
 
+
 void waitLoaded() {
   while(routerLine.get_value() > ROUTER_BALL_THRESHOLD) delay(5);
 }
