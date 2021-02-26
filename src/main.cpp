@@ -61,7 +61,9 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	double start = millis();
 	skillsRoute();
+	printf("Time used: %.2f seconds\n", (millis() - start/1000));
 }
 
 /**
