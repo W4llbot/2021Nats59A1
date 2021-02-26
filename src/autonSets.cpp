@@ -83,7 +83,7 @@ void skillsRoute() {
   // collect 2 balls
   baseMove(-10);
   waitBase(1000);
-  baseTurn(-95, 1.4, 0.7);
+  baseTurn(-92, 1.4, 0.7);
   waitBase(1000);
   shootBall();
   baseMove(-45);
@@ -91,15 +91,16 @@ void skillsRoute() {
   baseTurn(-33, 1.4, 0.7);
   intake(127);
   waitBase(1000);
-  baseMove(21);
+  baseMove(23);
   waitBase(1000);
-  baseMove(-11);
+  baseMove(-12.5);
   waitBase(1000);
   baseTurn(30, 1.4, 0.7);
   waitBase(1500);
-  baseMove(15);
+  baseMove(20);
   waitBase(1000);
 
+  // score tower 3
   powerBase(60, 60);
   intake(127);
   shootBall();
@@ -112,4 +113,27 @@ void skillsRoute() {
   unPauseBase();
   baseMove(-10);
   waitBase(1000);
+
+  baseTurn(10, 2.4, 1.2);
+  waitBase(1000);
+  baseMove(-55);
+  delay(500);
+  shootBall();
+  waitBase(1000);
+  shootBall();
+  baseTurn(70, 1.4, 0.7);
+  waitBase(1500);
+  baseMove(28);
+  waitBase(1000);
+
+  powerBase(60, 60);
+  intake(127);
+  shootBall();
+  waitShooter();
+  intake(-127);
+  unPauseBase();
+  baseMove(-10);
+  waitBase(1000);
+
+
 }
