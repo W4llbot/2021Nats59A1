@@ -69,6 +69,7 @@ void shootBall() {
 void forceOuttake(bool value) {
   forcedOuttake = value;
 }
+
 void intake(int speed) {
   lRoller.move(speed);
   rRoller.move(speed);

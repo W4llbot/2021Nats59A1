@@ -1,12 +1,34 @@
 #include "main.h"
-#define DEFAULT_KP 0.27
-#define DEFAULT_KD 0.2
-#define DEFAULT_TURN_KP 1.2 // 20 degrees = 2.5,90 degrees = 1.2 180 degrees = 1
-#define DEFAULT_TURN_KD 0.6
+#define DEFAULT_KP 0.25
+/*  10 = 0.35,
+    15 = 0.3,
+    20-30-35 = 0.27,
+    40-50-60 = 0.25 */
+#define DEFAULT_KD 0.0
+#define DEFAULT_TURN_KP 1.35
+/*  20 = 2.5,
+    30 = 2.1,
+    40 = 1.8,
+    50 = 1.6,
+    60 = 1.5,
+    70 = 1.4,
+    80 = 1.35,
+    90 = 1.3,
+    100 = 1.25,
+    110 = 1.2,
+    120 = 1.15,
+    130 = 1.13,
+    140 = 1.11,
+    150 = 1.08,
+    160 = 1.05,
+    170 = 1.02,
+    175 = 0.98,
+    180 = 0.967 */
+#define DEFAULT_TURN_KD 0.0
 #define RAMPING_POW 1.2
 #define DISTANCE_LEEWAY 15
 #define BEARING_LEEWAY 1.5
-#define MAX_POW 100
+#define MAX_POW 120
 
 double targEncdL = 0, targEncdR = 0, targBearing = 0;
 double errorEncdL = 0, errorEncdR = 0, errorBearing = 0;
@@ -17,6 +39,7 @@ double kP = DEFAULT_KP, kD = DEFAULT_KD;
 bool turnMode = false, pauseBase = false;
 
 void baseMove(double dis, double kp, double kd){
+  printf("baseMove(%.2f)\n", dis);
   turnMode = false;
   targEncdL += dis/inPerDeg;
   targEncdR += dis/inPerDeg;
@@ -29,6 +52,7 @@ void baseMove(double dis){
 }
 
 void baseTurn(double p_bearing, double kp, double kd){
+  printf("baseTurn(%.2f, %.2f, %.2f)\n", p_bearing, kp, kd);
   turnMode = true;
   targBearing = p_bearing;
 	kP = kp;
@@ -39,12 +63,14 @@ void baseTurn(double bearing){
 }
 
 void powerBase(double l, double r) {
+  printf("powerBase(%.2f, %.2f)\n", l, r);
   pauseBase = true;
   powerL = l;
   powerR = r;
 }
 
 void timerBase(double l, double r, double t) {
+  printf("timerBase(%.2f, %.2f, %.2f)\n", l, r, t);
   pauseBase = true;
   powerL = l;
   powerR = r;
@@ -65,9 +91,9 @@ void unPauseBase() {
 void waitBase(double cutoff){
 	double start = millis();
   if(turnMode) {
-    while(fabs(targBearing - bearing) > BEARING_LEEWAY && (millis()-start) < cutoff) delay(20);
+    while(fabs(targBearing - bearing) > BEARING_LEEWAY/* && (millis()-start) < cutoff*/) delay(20);
   }else{
-    while((fabs(targEncdL - encdL) > DISTANCE_LEEWAY || fabs(targEncdR - encdR) > DISTANCE_LEEWAY) && (millis()-start) < cutoff) delay(20);
+    while((fabs(targEncdL - encdL) > DISTANCE_LEEWAY || fabs(targEncdR - encdR) > DISTANCE_LEEWAY)/* && (millis()-start) < cutoff*/) delay(20);
   }
 
   targEncdL = encdL;
