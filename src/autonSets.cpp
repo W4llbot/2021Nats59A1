@@ -23,24 +23,27 @@ void scoreFinal() {
   timerBase(-80, -80, 500);
 }
 
+double offset = 0;
+double ramPow = 40;
+
 void goal8() {
   intake(-127);
-  baseMove(-16, 0.3, 0);
+  baseMove(-17, 0.3, 0);
   waitBase(1000);
-  baseTurn(-45, 1.8, 0);
+  baseTurn(-43 + offset, 1.85, 0);
   waitBase(1000);
-  baseMove(-47.5, 0.25, 0);
+  baseMove(-46, 0.25, 0);
   shootBall();
   waitShooter();
   delay(100);
   shootBall();
   waitBase(2000);
-  baseTurn(43, 1.35, 0);
+  baseTurn(43 + offset, 1.35, 0);
   waitBase(1500);
   baseMove(9, 0.4, 0);
   waitBase(1000);
 
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   intake(127);
   shootBall();
   waitLoaded();
@@ -51,12 +54,13 @@ void goal8() {
   waitBase(1500);
   shootBall();
   intake(0);
-  baseTurn(-133, 1, 0);
+  baseTurn(-133 + offset, 1, 0);
   waitBase(2000);
   baseMove(9, 0.4, 0);
   waitBase(1000);
   scoreFinal();
 }
+
 
 void skillsRoute() {
   // intake 2 balls
@@ -78,7 +82,7 @@ void skillsRoute() {
 
   // score tower 1
   printf("Scoring Tower 1\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   intake(127);
   shootBall();
   waitShooter();
@@ -98,7 +102,7 @@ void skillsRoute() {
   waitBase(1500);
   baseTurn(-86, 2.7, 0);
   waitBase(1500);
-  baseMove(-39.5, 0.26, 0);
+  baseMove(-39, 0.26, 0);
   waitBase(1500);
   baseTurn(-18, 1.37, 0);
   waitBase(1500);
@@ -108,7 +112,7 @@ void skillsRoute() {
 
   // score tower 2
   printf("Scoring Tower 2\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   shootBall();
   waitShooter();
   delay(10);
@@ -130,7 +134,7 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(21, 0.3, 0);
   waitBase(1500);
-  baseMove(-14, 0.35, 0);
+  baseMove(-13.5, 0.35, 0);
   waitBase(1000);
   baseTurn(28, 1.5, 0);
   waitBase(1500);
@@ -139,7 +143,7 @@ void skillsRoute() {
 
   // score tower 3
   printf("Scoring Tower 3\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   intake(127);
   shootBall();
   waitShooter();
@@ -159,14 +163,14 @@ void skillsRoute() {
   baseTurn(4, 2.6, 0);
   waitBase(1000);
   baseMove(-38.5, 0.27, 0);
-  waitBase(1000);
+  waitBase(1500);
   baseTurn(70, 1.40, 0);
   waitBase(1500);
   baseMove(28, 0.3, 0);
   waitBase(1000);
 
   printf("Scoring Tower 4\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   intake(127);
   shootBall();
   waitLoaded();
@@ -175,7 +179,7 @@ void skillsRoute() {
 
   baseMove(-10, 0.35, 0);
   waitBase(1000);
-  baseTurn(40, 2.2, 0);
+  baseTurn(40, 2.27, 0);
   delay(200);
   shootBall();
   waitBase(500);
@@ -189,7 +193,7 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1000);
-  baseMove(-16, 0.3, 0);
+  baseMove(-15, 0.3, 0);
   waitBase(1000);
 
   // second half
@@ -207,7 +211,7 @@ void skillsRoute() {
 
   // score tower 1
   printf("Scoring Tower 1\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   intake(127);
   shootBall();
   waitShooter();
@@ -227,7 +231,7 @@ void skillsRoute() {
   waitBase(1500);
   baseTurn(-86 + 180, 2.7, 0);
   waitBase(1500);
-  baseMove(-39.5, 0.26, 0);
+  baseMove(-38.5, 0.26, 0);
   waitBase(1500);
   baseTurn(-18 + 180, 1.37, 0);
   waitBase(1500);
@@ -237,7 +241,7 @@ void skillsRoute() {
 
   // score tower 2
   printf("Scoring Tower 2\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   shootBall();
   waitShooter();
   delay(10);
@@ -257,9 +261,9 @@ void skillsRoute() {
   baseTurn(-33 + 180, 1.45, 0);
   intake(127);
   waitBase(1000);
-  baseMove(21, 0.3, 0);
+  baseMove(22, 0.3, 0);
   waitBase(1500);
-  baseMove(-13, 0.35, 0);
+  baseMove(-12, 0.35, 0);
   waitBase(1000);
   baseTurn(28 + 180, 1.5, 0);
   waitBase(1500);
@@ -268,7 +272,7 @@ void skillsRoute() {
 
   // score tower 3
   printf("Scoring Tower 3\n\n\n");
-  powerBase(60, 60);
+  powerBase(ramPow, ramPow);
   intake(127);
   shootBall();
   waitShooter();
@@ -278,4 +282,7 @@ void skillsRoute() {
   waitLoaded();
   intake(-127);
   unPauseBase();
+
+  offset = bearing;
+  goal8();
 }

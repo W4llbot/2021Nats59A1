@@ -91,9 +91,9 @@ void unPauseBase() {
 void waitBase(double cutoff){
 	double start = millis();
   if(turnMode) {
-    while(fabs(targBearing - bearing) > BEARING_LEEWAY/* && (millis()-start) < cutoff*/) delay(20);
+    while(fabs(targBearing - bearing) > BEARING_LEEWAY && (millis()-start) < cutoff) delay(20);
   }else{
-    while((fabs(targEncdL - encdL) > DISTANCE_LEEWAY || fabs(targEncdR - encdR) > DISTANCE_LEEWAY)/* && (millis()-start) < cutoff*/) delay(20);
+    while((fabs(targEncdL - encdL) > DISTANCE_LEEWAY || fabs(targEncdR - encdR) > DISTANCE_LEEWAY) && (millis()-start) < cutoff) delay(20);
   }
 
   targEncdL = encdL;

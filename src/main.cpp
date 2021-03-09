@@ -62,10 +62,8 @@ void competition_initialize() {}
  */
 void autonomous() {
 	double start = millis();
- 	goal8();
-	// skillsRoute();
-	// baseTurn(80);
-	// waitBase(10000000);
+ 	// goal8();
+	skillsRoute();
 	printf("Time used: %.2f seconds\n", (millis() - start)/1000);
 	Controller master(E_CONTROLLER_MASTER);
 	master.print(0, 0, "Time: %.2f\n", (millis() - start)/1000);
