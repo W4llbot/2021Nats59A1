@@ -66,7 +66,9 @@ void autonomous() {
 	skillsRoute();
 	printf("Time used: %.2f seconds\n", (millis() - start)/1000);
 	Controller master(E_CONTROLLER_MASTER);
-	master.print(0, 0, "Time: %.2f\n", (millis() - start)/1000);
+	master.clear();
+	double final = (millis() - start)/1000;
+	while(true) master.print(1, 0, "Time: %.2f\n", final);
 }
 
 /**

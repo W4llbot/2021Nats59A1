@@ -30,9 +30,9 @@ void goal8() {
   intake(-127);
   baseMove(-17, 0.3, 0);
   waitBase(1000);
-  baseTurn(-43 + offset, 1.85, 0);
+  baseTurn(-43.5 + offset, 1.85, 0);
   waitBase(1000);
-  baseMove(-46, 0.25, 0);
+  baseMove(-48, 0.25, 0);
   shootBall();
   waitShooter();
   delay(100);
@@ -100,9 +100,9 @@ void skillsRoute() {
   delay(500);
   forceOuttake(false);
   waitBase(1500);
-  baseTurn(-86, 2.7, 0);
+  baseTurn(-86, 2.75, 0);
   waitBase(1500);
-  baseMove(-39, 0.26, 0);
+  baseMove(-40.3, 0.26, 0);
   waitBase(1500);
   baseTurn(-18, 1.37, 0);
   waitBase(1500);
@@ -132,9 +132,9 @@ void skillsRoute() {
   baseTurn(-33, 1.45, 0);
   intake(127);
   waitBase(1000);
-  baseMove(21, 0.3, 0);
+  baseMove(22, 0.3, 0);
   waitBase(1500);
-  baseMove(-13.5, 0.35, 0);
+  baseMove(-13, 0.35, 0);
   waitBase(1000);
   baseTurn(28, 1.5, 0);
   waitBase(1500);
@@ -160,9 +160,9 @@ void skillsRoute() {
   delay(500);
   forceOuttake(false);
   waitBase(1000);
-  baseTurn(4, 2.6, 0);
+  baseTurn(4, 2.7, 0);
   waitBase(1000);
-  baseMove(-38.5, 0.27, 0);
+  baseMove(-39, 0.27, 0);
   waitBase(1500);
   baseTurn(70, 1.40, 0);
   waitBase(1500);
@@ -193,7 +193,7 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1000);
-  baseMove(-15, 0.3, 0);
+  baseMove(-14, 0.3, 0);
   waitBase(1000);
 
   // second half
@@ -228,14 +228,14 @@ void skillsRoute() {
   forceOuttake(true);
   delay(500);
   forceOuttake(false);
-  waitBase(1500);
+  waitBase(2000);
   baseTurn(-86 + 180, 2.7, 0);
   waitBase(1500);
-  baseMove(-38.5, 0.26, 0);
+  baseMove(-40, 0.26, 0);
   waitBase(1500);
   baseTurn(-18 + 180, 1.37, 0);
   waitBase(1500);
-  baseMove(28, 0.29, 0);
+  baseMove(30, 0.29, 0);
   intake(127);
   waitBase(1500);
 
@@ -263,7 +263,7 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1500);
-  baseMove(-12, 0.35, 0);
+  baseMove(-11.5, 0.35, 0);
   waitBase(1000);
   baseTurn(28 + 180, 1.5, 0);
   waitBase(1500);
