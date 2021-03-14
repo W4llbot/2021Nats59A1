@@ -28,16 +28,15 @@ double ramPow = 40;
 
 void goal8() {
   intake(-127);
-  baseMove(-17, 0.3, 0);
+  baseMove(-18, 0.3, 0);
   waitBase(1000);
+  forceOuttake(true);
   baseTurn(-43.5 + offset, 1.85, 0);
   waitBase(1000);
-  baseMove(-48, 0.25, 0);
-  shootBall();
-  waitShooter();
-  delay(100);
-  shootBall();
-  waitBase(2000);
+  baseMove(-47.4, 0.25, 0);
+  delay(500);
+  forceOuttake(false);
+  waitBase(1500);
   baseTurn(43 + offset, 1.35, 0);
   waitBase(1500);
   baseMove(9, 0.4, 0);
@@ -45,7 +44,6 @@ void goal8() {
 
   powerBase(ramPow, ramPow);
   intake(127);
-  shootBall();
   waitLoaded();
   intake(-127);
   unPauseBase();
@@ -61,8 +59,16 @@ void goal8() {
   scoreFinal();
 }
 
+void shootPreload() {
+  Motor shooter(shooterPort);
+  shooter.move(127);
+  delay(300);
+  shooter.move(0);
+}
+
 
 void skillsRoute() {
+  shootPreload();
   // intake 2 balls
   intake(127);
   baseMove(48, 0.26, 0);
@@ -134,7 +140,7 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1500);
-  baseMove(-13, 0.35, 0);
+  baseMove(-13.5, 0.35, 0);
   waitBase(1000);
   baseTurn(28, 1.5, 0);
   waitBase(1500);
@@ -231,7 +237,7 @@ void skillsRoute() {
   waitBase(2000);
   baseTurn(-86 + 180, 2.7, 0);
   waitBase(1500);
-  baseMove(-40, 0.26, 0);
+  baseMove(-39.5, 0.26, 0);
   waitBase(1500);
   baseTurn(-18 + 180, 1.37, 0);
   waitBase(1500);
