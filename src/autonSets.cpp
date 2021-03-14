@@ -31,13 +31,13 @@ void goal8() {
   baseMove(-18, 0.3, 0);
   waitBase(1000);
   forceOuttake(true);
-  baseTurn(-43.5 + offset, 1.85, 0);
+  baseTurn(-40 + offset, 1.85, 0);
   waitBase(1000);
-  baseMove(-47.4, 0.25, 0);
+  baseMove(-46, 0.25, 0);
   delay(500);
   forceOuttake(false);
   waitBase(1500);
-  baseTurn(43 + offset, 1.35, 0);
+  baseTurn(48 + offset, 1.25, 0);
   waitBase(1500);
   baseMove(9, 0.4, 0);
   waitBase(1000);
@@ -52,7 +52,7 @@ void goal8() {
   waitBase(1500);
   shootBall();
   intake(0);
-  baseTurn(-133 + offset, 1, 0);
+  baseTurn(228 + offset, 0.965, 0);
   waitBase(2000);
   baseMove(9, 0.4, 0);
   waitBase(1000);
@@ -70,6 +70,7 @@ void shootPreload() {
 void skillsRoute() {
   shootPreload();
   // intake 2 balls
+
   intake(127);
   baseMove(48, 0.26, 0);
   waitBase(2000);
@@ -80,7 +81,7 @@ void skillsRoute() {
   intake(0);
 
   // turn to tower 1
-  baseTurn(-63, 1.5, 0);
+  baseTurn(-63, 1.45, 0);
   waitBase(1000);
   // delay(100);
   baseMove(17, 0.32, 0);
@@ -110,9 +111,9 @@ void skillsRoute() {
   waitBase(1500);
   baseMove(-40.3, 0.26, 0);
   waitBase(1500);
-  baseTurn(-18, 1.37, 0);
+  baseTurn(-18, 1.33, 0);
   waitBase(1500);
-  baseMove(29, 0.29, 0);
+  baseMove(30, 0.29, 0);
   intake(127);
   waitBase(1500);
 
@@ -130,8 +131,8 @@ void skillsRoute() {
   // collect 2 balls
   baseMove(-10, 0.35, 0);
   waitBase(1000);
-  baseTurn(-92, 1.42, 0);
-  waitBase(1000);
+  baseTurn(-94, 1.3, 0);
+  waitBase(1500);
   shootBall();
   baseMove(-45, 0.25, 0);
   waitBase(1500);
@@ -140,9 +141,9 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1500);
-  baseMove(-13.5, 0.35, 0);
+  baseMove(-14, 0.35, 0);
   waitBase(1000);
-  baseTurn(28, 1.5, 0);
+  baseTurn(28, 1.45, 0);
   waitBase(1500);
   baseMove(19, 0.35, 0);
   waitBase(1000);
@@ -159,21 +160,20 @@ void skillsRoute() {
   waitLoaded();
   intake(-127);
   unPauseBase();
-
   baseMove(-32, 0.27, 0);
   delay(100);
   forceOuttake(true);
   delay(500);
   forceOuttake(false);
   waitBase(1000);
-  baseTurn(4, 2.7, 0);
+  baseTurn(4, 2.8, 0);
   waitBase(1000);
   baseMove(-39, 0.27, 0);
   waitBase(1500);
   baseTurn(70, 1.40, 0);
   waitBase(1500);
-  baseMove(28, 0.3, 0);
-  waitBase(1000);
+  baseMove(29, 0.3, 0);
+  waitBase(2000);
 
   printf("Scoring Tower 4\n\n\n");
   powerBase(ramPow, ramPow);
@@ -185,21 +185,21 @@ void skillsRoute() {
 
   baseMove(-10, 0.35, 0);
   waitBase(1000);
-  baseTurn(40, 2.27, 0);
+  baseTurn(40, 2.3, 0);
   delay(200);
   shootBall();
   waitBase(500);
   delay(200);
-  baseTurn(160, 1.15, 0);
+  baseTurn(160, 1.12, 0);
   waitBase(1500);
   intake(127);
   baseMove(36, 0.27, 0);
   waitBase(1500);
-  baseTurn(180, 2.5, 0);
+  baseTurn(180, 2.7, 0);
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1000);
-  baseMove(-14, 0.3, 0);
+  baseMove(-14.5, 0.3, 0);
   waitBase(1000);
 
   // second half
@@ -209,7 +209,7 @@ void skillsRoute() {
   //
 
   // turn to tower 1
-  baseTurn(-63 + 180, 1.5, 0);
+  baseTurn(-63 + 180, 1.45, 0);
   waitBase(1000);
   // delay(100);
   baseMove(17, 0.32, 0);
@@ -234,12 +234,12 @@ void skillsRoute() {
   forceOuttake(true);
   delay(500);
   forceOuttake(false);
-  waitBase(2000);
-  baseTurn(-86 + 180, 2.7, 0);
   waitBase(1500);
-  baseMove(-39.5, 0.26, 0);
+  baseTurn(-86 + 180, 2.75, 0);
   waitBase(1500);
-  baseTurn(-18 + 180, 1.37, 0);
+  baseMove(-40.3, 0.26, 0);
+  waitBase(1500);
+  baseTurn(-18 + 180, 1.33, 0);
   waitBase(1500);
   baseMove(30, 0.29, 0);
   intake(127);
@@ -259,8 +259,8 @@ void skillsRoute() {
   // collect 2 balls
   baseMove(-10, 0.35, 0);
   waitBase(1000);
-  baseTurn(-92 + 180, 1.42, 0);
-  waitBase(1000);
+  baseTurn(-94 + 180, 1.28, 0);
+  waitBase(1500);
   shootBall();
   baseMove(-45, 0.25, 0);
   waitBase(1500);
@@ -269,9 +269,9 @@ void skillsRoute() {
   waitBase(1000);
   baseMove(22, 0.3, 0);
   waitBase(1500);
-  baseMove(-11.5, 0.35, 0);
+  baseMove(-14, 0.35, 0);
   waitBase(1000);
-  baseTurn(28 + 180, 1.5, 0);
+  baseTurn(28 + 180, 1.45, 0);
   waitBase(1500);
   baseMove(19, 0.35, 0);
   waitBase(1000);

@@ -98,6 +98,7 @@ void waitBase(double cutoff){
 
   targEncdL = encdL;
   targEncdR = encdR;
+  printf("Tima taken %.2f\n", (millis() - start));
 }
 
 void Control(void * ignore){
